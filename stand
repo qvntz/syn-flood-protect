@@ -1,0 +1,69 @@
+#!/bin/sh
+
+[ $# -ge 1 ] || { echo >&2 "Usage: $0 {up|down|status|attach|detach|log|exec|listen}"; exit 1; }
+[ $UID -eq 0 ] || { echo >&2 "This script requires root."; exit 1; }
+
+action="$1"
+netns=xdp-test
+local=xdp-local
+remote=xdp-remote
+dummy=xdp_dummy.o
+filter=xdp_filter.o
+
+case "$action" in
+# поднятие стенда
+up)
+    # создаем пространство имен и помещаем туда ${remote}
+    ip netns add ${netns}
+    ip link add ${remote} type veth peer name ${local}
+    ip link set ${remote} netns ${netns}
+    # настройка интерфейса в netns
+    ip netns exec ${netns} ip address add 192.0.2.2/24 dev ${remote}
+    ip netns exec ${netns} ip link set ${remote} up
+    # настраиваем ${local} в дефолтном пространстве имен
+    ip address add 192.0.2.1/24 dev ${local}
+    ip link set ${local} up
+    ;;
+
+# удаление стенда
+down)
+    ip netns delete ${netns}
+    ip link delete ${local}
+    ;;
+
+# статус работы
+status)
+    if ip netns list | grep ${netns} 2>&1 >/dev/null; then
+        echo "Stand is UP."
+    else
+        echo "Stand is DOWN."
+    fi
+    ;;
+
+# привязать к интерфейсу
+attach)
+    ip netns exec ${netns} ip -force link set dev ${remote} xdp object ${dummy} >/dev/null
+    ip -force link set dev ${local} xdp object ${filter} verbose
+    ;;
+
+# отвязать от интерфейса
+detach)
+    ip netns exec ${netns} ip link set dev ${remote} xdp off
+    ip link set dev ${local} xdp off
+    ;;
+
+# логи, вывод идет в канал трассировки ядра
+log)
+    echo -n 1 > /sys/kernel/debug/tracing/options/trace_printk
+    cat /sys/kernel/debug/tracing/trace_pipe
+    ;;
+
+exec)
+    shift
+    ip netns exec ${netns} $@
+    ;;
+
+listen)
+    ip netns exec ${netns} tcpdump -tnevi ${remote} not ip6
+    ;;
+esac
