@@ -11,10 +11,10 @@
 ---
 ## Сборка ##
     
-1. Сборка под **Debian 10 kernel 4.19.67**: `make`
-2. Сборка под **Arch Linux kernel 5.3.1**:
-    1. Переключиться на ветку [arch](): `git switch arch`
+1. Сборка под **Debian 10 kernel 4.19.67**: 
+    1. Переключиться на ветку [main](https://github.com/qvntz/xdp-syn-cookie/tree/main): `git switch main`
     2. `make`
+4. Сборка под **Arch Linux kernel 5.3.1**: `make`
     
 После сборки командой `make` мы получим файл `xdp_filter.o`
 
