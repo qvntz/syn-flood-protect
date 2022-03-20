@@ -2,9 +2,9 @@
 
 ## Содержание
 1. [Сборка](https://github.com/qvntz/xdp-syn-cookie/tree/main#сборка)
-2. [Тестовый стенд](#тестовый-стенд)
-3. [Задача](#задача)
-4. [Псевдокод решения задачи](#псевдокод-решения-задачи)
+2. [Тестовый стенд](https://github.com/qvntz/xdp-syn-cookie/tree/main#тестовый-стенд)
+3. [Задача](https://github.com/qvntz/xdp-syn-cookie/tree/main#задача)
+4. [Псевдокод решения задачи](https://github.com/qvntz/xdp-syn-cookie#псевдокод-решения-задачи)
 5. [Технологии](#технологии)
 
 
