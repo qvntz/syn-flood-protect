@@ -1,8 +1,8 @@
 CLANG ?= clang
-LLC ?= llc-7
+LLC ?= llc
 
 # Путь к заголовкам ядра
-KDIR ?= /usr/src/linux-headers-$(shell uname -r)
+KDIR ?= /lib/modules/$(shell uname -r)/build
 # Архитектура системы
 ARCH ?= $(subst x86_64,x86,$(shell uname -m))
 
@@ -10,8 +10,6 @@ ARCH ?= $(subst x86_64,x86,$(shell uname -m))
 CFLAGS = \
 	-Ihelpers \
 	\
-	-I/usr/src/linux-headers-4.19.0-6-common/include \
-    -I/usr/src/linux-headers-4.19.0-6-common/arch/$(ARCH)/include \
 	-I$(KDIR)/include \
 	-I$(KDIR)/include/uapi \
 	-I$(KDIR)/include/generated/uapi \
