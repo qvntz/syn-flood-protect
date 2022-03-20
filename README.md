@@ -1,10 +1,10 @@
 # Защита от SYN-flood
 
 ## Содержание
-1. [Сборка](https://github.com/qvntz/xdp-syn-cookie/tree/main#сборка)
-2. [Тестовый стенд](https://github.com/qvntz/xdp-syn-cookie/tree/main#тестовый-стенд)
-3. [Задача](https://github.com/qvntz/xdp-syn-cookie/tree/main#задача)
-4. [Псевдокод решения задачи](https://github.com/qvntz/xdp-syn-cookie#псевдокод-решения-задачи)
+1. [Сборка](https://github.com/qvntz/syn-flood-protect/tree/main#сборка)
+2. [Тестовый стенд](https://github.com/qvntz/syn-flood-protect/tree/main#тестовый-стенд)
+3. [Задача](https://github.com/qvntz/syn-flood-protect/tree/main#задача)
+4. [Псевдокод решения задачи](https://github.com/qvntz/syn-flood-protect#псевдокод-решения-задачи)
 5. [Технологии](#технологии)
 
 
@@ -13,7 +13,7 @@
     
 1. Сборка под **Debian 10 kernel 4.19.67**: `make`
 2. Сборка под **Arch Linux kernel 5.3.1**:
-    1. Переключиться на ветку [arch](https://github.com/qvntz/xdp-syn-cookie/tree/arch): `git switch arch`
+    1. Переключиться на ветку [arch](https://github.com/qvntz/syn-flood-protect/tree/arch): `git switch arch`
     2. `make`
     
 После сборки командой `make` мы получим файл `xdp_filter.o`
